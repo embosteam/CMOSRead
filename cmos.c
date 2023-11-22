@@ -8,7 +8,7 @@
 #endif
 
 
-struct pair{
+struct tuple{
     unsigned char first;
     unsigned char second;
     unsigned char third;
@@ -24,17 +24,17 @@ unsigned char readCmos(unsigned char index){
     return value;
 }
 
-struct pair work1(){
-    struct pair result = {0,};
+struct tuple work1(){
+    struct tuple result = {0,};
     return result;
 }
-struct pair ExampleFunction(){struct pair result = {0,};return result;}
-struct pair work2(){
-    struct pair result = {0,};
+struct tuple ExampleFunction(){struct tuple result = {0,};return result;}
+struct tuple work2(){
+    struct tuple result = {0,};
     return result;
 }
-struct pair getMinuteAndSecond(){
-    struct pair result = {0,};
+struct tuple getMinuteAndSecond(){
+    struct tuple result = {0,};
     //example
     unsigned char minute = readCmos(0x02);
     //example
@@ -51,7 +51,7 @@ int main(){
         fprintf(stderr,"[error]ret: %d\n",ret);
         return ret;
     }
-    struct pair example = ExampleFunction();
+    struct tuple example = ExampleFunction();
     unsigned char value1 = example.first;
     unsigned char value2 = example.second;
     unsigned char century = 0;
