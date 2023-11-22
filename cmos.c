@@ -17,7 +17,7 @@ struct tuple{
 unsigned char readCmos(unsigned char index){
     unsigned char value;
     outb(index,0x70);
-    usleep(100);
+    usleep(5);
     value = inb(0x71);
     //printf("[%x]: %x\n",index,value);
     //value = index;
@@ -33,6 +33,7 @@ struct tuple work2(){
     struct tuple result = {0,};
     return result;
 }
+//To improve legibility
 struct tuple getMinuteAndSecond(){
     struct tuple result = {0,};
     //example
@@ -54,13 +55,15 @@ int main(){
     struct tuple example = ExampleFunction();
     unsigned char value1 = example.first;
     unsigned char value2 = example.second;
+
+    struct tuple minute_and_second = getMinuteAndSecond();
     unsigned char century = 0;
     unsigned char year = 0;
     unsigned char month = 0;
     unsigned char day = 0;
     unsigned char hour = 0;
-    unsigned char sec = 0;
-    unsigned char minute = 0;
+    unsigned char sec = minute_and_second.second;
+    unsigned char minute = minute_and_second.first;
 
     printf("%02x%02x-%02x-%02x %02x:%02x:%02x\n",century,year,month,day,hour,minute,sec);
     return 0;
