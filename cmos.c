@@ -45,6 +45,37 @@ struct tuple getMinuteAndSecond(){
     return result;
 }
 
+struct tuple getYearAndMonth()
+{
+    struct tuple result = {0,};
+    //example
+    unsigned char year = readCmos(0x09);
+    //example
+    unsigned char month = readCmos(0x08);
+
+    result.first = year;
+    result.second = month;
+    
+    return result;
+}
+
+struct tuple getCenturyDayAndHour()
+{
+    struct tuple result = {0,};
+    //example
+    unsigned char century = readCmos(0x32);
+    unsigned char day = readCmos(0x07);
+    unsigned char hour = readCmos(0x04);
+
+
+    result.first = century;
+    result.second = day;
+    result.third = hour;
+    
+    return result;
+}
+
+
 int main(){
     int ret;
     ret = iopl(3);
@@ -57,11 +88,13 @@ int main(){
     unsigned char value2 = example.second;
 
     struct tuple minute_and_second = getMinuteAndSecond();
-    unsigned char century = 0;
-    unsigned char year = 0;
-    unsigned char month = 0;
-    unsigned char day = 0;
-    unsigned char hour = 0;
+    struct tuple year_and_month = getYearAndMonth();
+    struct tuple century_day_and_hour = getCenturyDayAndHour();
+    unsigned char century = century_day_and_hour.first;
+    unsigned char year = year_and_month.first;
+    unsigned char month = year_and_month.second;
+    unsigned char day = century_day_and_hour.second;
+    unsigned char hour = century_day_and_hour.third;
     unsigned char sec = minute_and_second.second;
     unsigned char minute = minute_and_second.first;
 
